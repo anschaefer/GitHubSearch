@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct GitHubSearchApp: App {
@@ -13,5 +14,6 @@ struct GitHubSearchApp: App {
         WindowGroup {
             ContentView()
         }
+        .modelContainer(for: FollowingUser.self)
     }
 }
