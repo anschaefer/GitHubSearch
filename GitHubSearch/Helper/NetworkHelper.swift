@@ -23,4 +23,20 @@ struct NetworkHelper {
         
         return request
     }
+    
+    func getPaginationLastPage(for response: URLResponse) -> Int? {
+        var pages: Set<Int> = Set()
+        
+        let httpResponse = response as? HTTPURLResponse
+        if let linkStr = httpResponse?.value(forHTTPHeaderField: "Link") {
+            let strArr = linkStr.split(separator: " ")
+            for item in strArr {
+                let part = item.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+                if let lastNumber = part.last?.wholeNumberValue {
+                    pages.insert(lastNumber)
+                }
+            }
+        }
+        return pages.max()
+    }
 }

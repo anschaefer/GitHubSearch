@@ -25,7 +25,7 @@ struct ContentView: View {
             }.toolbar(content: {
                 Button("Delete data", action: deleteData)
             })
-        }.modelContext(modelContext)
+        }
     }
     
     func deleteData() {

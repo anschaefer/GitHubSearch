@@ -10,12 +10,18 @@ import SwiftData
 
 struct FollowingUserView: View {
     @Environment(\.modelContext) var modelContext
-    @Query var followingUsers: [FollowingUser]
+    @State var followingUsers = [FollowingUser]()
     
     var login: String
     
     var body: some View {
         NavigationStack {
+            Button("Get Following Users") {
+                Task {
+                    await getFollowingUsers(for: login)
+                }
+            }
+            
             List(followingUsers, id: \.login) { item in
                 HStack() {
                     AsyncImage(url: URL(string: item.avatarUrl)) { image in
@@ -31,21 +37,57 @@ struct FollowingUserView: View {
                     NavigationLink(item.login, destination: UserView(login: item.login))
                         .font(.headline)
                         .navigationTitle("Following Users")
-                        
+                    
                 }
             }
             .toolbar(content: {
                 NavigationLink("Search", destination: ContentView())
             })
-            .onAppear().task {
-                await getFollowingUsers(for: login)
-            }
-        }.modelContext(modelContext)
+        }
     }
     
     func getFollowingUsers(for login: String) async {
-        // Pagination needs to be variable
-        for pageIndex in 1...20 {
+        let endpoint = "https://api.github.com/users/\(login)/following"
+        
+        
+        guard let url = URL(string: endpoint) else {
+            print("Invalid url")
+            return
+        }
+        
+        let requestHelper = NetworkHelper()
+        let session = requestHelper.createUrlSession(sessionName: "Following User Session")
+        let request = requestHelper.createRequest(for: url, withMethod: HttpMethods.GET)
+        
+        do {
+            let (data, response) = try await session.data(for: request)
+            
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            
+            if let decodedResponse = try? decoder.decode([FollowingUser].self, from: data) {
+                for user in decodedResponse {
+                    followingUsers.append(user)
+                }
+            }
+            
+            if let pagination = requestHelper.getPaginationLastPage(for: response) {
+                await addPaginatedUsersIfAvailable(for: pagination)
+            }
+        } catch {
+            print("Invalid data")
+        }
+        
+        for user in followingUsers {
+            modelContext.insert(user)
+        }
+    }
+    
+    func addPaginatedUsersIfAvailable(for pagination: Int) async {
+        let requestHelper = NetworkHelper()
+        
+        print("Response of request uses pagination (pages: \(pagination))")
+        for pageIndex in 2...pagination {
             let endpoint = "https://api.github.com/users/\(login)/following?page=\(pageIndex)"
             
             guard let url = URL(string: endpoint) else {
@@ -53,10 +95,9 @@ struct FollowingUserView: View {
                 return
             }
             
-            let requestHelper = NetworkHelper()
-            let session = requestHelper.createUrlSession(sessionName: "Following User Session")
+            let session = requestHelper.createUrlSession(sessionName: "Following User Session Paginated")
             let request = requestHelper.createRequest(for: url, withMethod: HttpMethods.GET)
-
+            
             do {
                 let (data, _) = try await session.data(for: request)
                 
@@ -65,8 +106,7 @@ struct FollowingUserView: View {
                 
                 if let decodedResponse = try? decoder.decode([FollowingUser].self, from: data) {
                     for user in decodedResponse {
-                        let newUser = FollowingUser(login: user.login, avatarUrl: user.avatarUrl)
-                        modelContext.insert(newUser)
+                        followingUsers.append(user)
                     }
                 }
             } catch {
@@ -74,6 +114,7 @@ struct FollowingUserView: View {
             }
         }
     }
+    
 }
 
 #Preview {

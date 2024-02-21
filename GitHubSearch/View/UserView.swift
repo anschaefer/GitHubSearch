@@ -33,10 +33,16 @@ struct UserView: View {
                         Text(actualUser.bio)
                             .padding()
 
-                        NavigationLink("More", destination: DetailsView(user: actualUser))
+                        Text("Username: \(actualUser.twitterUsername)")
+                        Text("Company: \(actualUser.company)")
+                        Text("Followers: \(actualUser.followers)")
+                        Text("Public Repos: \(actualUser.publicRepos)")
+                        
+                        NavigationLink("Following users (\(actualUser.following))", destination: FollowingUserView(login: actualUser.login))
                             .padding(.top, 20)
                             .buttonStyle(.bordered)
-                            .navigationTitle("GitHub User")
+                            .disabled(actualUser.following == 0)
+                            .navigationTitle("User View")
                             .toolbar(content: {
                                 NavigationLink("Search", destination: ContentView())
                             })
