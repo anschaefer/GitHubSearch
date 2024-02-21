@@ -14,8 +14,6 @@ struct FollowingUserView: View {
     
     var login: String
     
-//    @State private var followingUsers = [FollowingUser]()
-    
     var body: some View {
         NavigationStack {
             List(followingUsers, id: \.login) { item in
@@ -33,13 +31,16 @@ struct FollowingUserView: View {
                     NavigationLink(item.login, destination: UserView(login: item.login))
                         .font(.headline)
                         .navigationTitle("Following Users")
+                        
                 }
-                
             }
+            .toolbar(content: {
+                NavigationLink("Search", destination: ContentView())
+            })
             .onAppear().task {
                 await getFollowingUsers(for: login)
             }
-        }
+        }.modelContext(modelContext)
     }
     
     func getFollowingUsers(for login: String) async {

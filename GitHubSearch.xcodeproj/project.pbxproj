@@ -117,7 +117,6 @@
 				97D48B8B2B85D0DD0050BFAF /* View */,
 				97D48B852B85D0510050BFAF /* Model */,
 				97D48B5B2B85D02A0050BFAF /* GitHubSearchApp.swift */,
-				97D48B5D2B85D02A0050BFAF /* ContentView.swift */,
 				97D48B5F2B85D02B0050BFAF /* Assets.xcassets */,
 				97D48B612B85D02B0050BFAF /* Preview Content */,
 			);
@@ -161,6 +160,7 @@
 		97D48B8B2B85D0DD0050BFAF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				97D48B5D2B85D02A0050BFAF /* ContentView.swift */,
 				97D48B8E2B85D1400050BFAF /* UserView.swift */,
 				97D48B902B85D16C0050BFAF /* DetailsView.swift */,
 				97D48B922B85D1A50050BFAF /* FollowingUserView.swift */,

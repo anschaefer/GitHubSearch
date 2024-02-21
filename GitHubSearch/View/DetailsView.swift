@@ -23,6 +23,9 @@ struct DetailsView: View {
                     .buttonStyle(.bordered)
                     .disabled(user.following == 0)
                     .navigationTitle("Detail View")
+                    .toolbar(content: {
+                        NavigationLink("Search", destination: ContentView())
+                    })
             }
         }
     }

@@ -29,8 +29,7 @@ struct SearchView: View {
                 .buttonStyle(.borderedProminent)
                 .padding(.top, 20)
                 .disabled(login == "")
-                
-            }.navigationTitle("SearchView")
+            }
         }
     }
 }
