@@ -6,9 +6,9 @@
 //
 
 import Foundation
+import OSLog
 
 struct NetworkHelper {
-    
     func createUrlSession(sessionName sessionDescription: String) -> URLSession {
         let session = URLSession(configuration:.default)
         session.sessionDescription = sessionDescription
@@ -24,19 +24,27 @@ struct NetworkHelper {
         return request
     }
     
+    static let pointsOfInterest = OSLog(subsystem: "com.cc.macansen.GithubSearch", category: .pointsOfInterest)
+    
     func getPaginationLastPage(for response: URLResponse) -> Int? {
+        os_signpost(.begin, log: NetworkHelper.pointsOfInterest, name: "getPaginationLastPage")
+        defer {
+            os_signpost(.end, log: NetworkHelper.pointsOfInterest, name: "getPaginationLastPage")
+        }
         var pages: Set<Int> = Set()
         
         let httpResponse = response as? HTTPURLResponse
         if let linkStr = httpResponse?.value(forHTTPHeaderField: "Link") {
             let strArr = linkStr.split(separator: " ")
-            for item in strArr {
-                let part = item.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+            
+            strArr.forEach {
+                let part = $0.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
                 if let lastNumber = part.last?.wholeNumberValue {
                     pages.insert(lastNumber)
                 }
             }
         }
+        
         return pages.max()
     }
 }

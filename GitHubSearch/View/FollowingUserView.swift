@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import OSLog
 
 struct FollowingUserView: View {
     @Environment(\.modelContext) var modelContext
@@ -47,6 +48,11 @@ struct FollowingUserView: View {
     }
     
     func getFollowingUsers(for login: String) async {
+        os_signpost(.begin, log: NetworkHelper.pointsOfInterest, name: "getFollowingUsers")
+        defer {
+            os_signpost(.end, log: NetworkHelper.pointsOfInterest, name: "getFollowingUsers")
+        }
+        
         let endpoint = "https://api.github.com/users/\(login)/following"
         
         
@@ -105,8 +111,8 @@ struct FollowingUserView: View {
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
                 
                 if let decodedResponse = try? decoder.decode([FollowingUser].self, from: data) {
-                    for user in decodedResponse {
-                        followingUsers.append(user)
+                    decodedResponse.forEach {
+                        followingUsers.append($0)
                     }
                 }
             } catch {
