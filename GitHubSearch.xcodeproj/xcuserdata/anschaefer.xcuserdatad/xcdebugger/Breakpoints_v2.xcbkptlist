@@ -3,4 +3,117 @@
    uuid = "02B5F80E-C4B5-4767-B783-E998027E99B3"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "050004C2-08D9-4D6B-987C-08A80ACF1FDE"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GitHubSearch/View/FollowingUserView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
+            landmarkName = "getFollowingUsers(for:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "050004C2-08D9-4D6B-987C-08A80ACF1FDE - 33ee9a0ff82a3146"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for GitHubSearch.FollowingUserView.getFollowingUsers(for: Swift.String) async -&gt; ()"
+                  moduleName = "GitHubSearch"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/anschaefer/Developer/GitHubSearch/GitHubSearch/View/FollowingUserView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "88"
+                  endingLineNumber = "88"
+                  offsetFromSymbolStart = "1508">
+               </Location>
+               <Location
+                  uuid = "050004C2-08D9-4D6B-987C-08A80ACF1FDE - c9f88bb0a4d4fd58"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(5) suspend resume partial function for GitHubSearch.FollowingUserView.getFollowingUsers(for: Swift.String) async -&gt; ()"
+                  moduleName = "GitHubSearch"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/anschaefer/Developer/GitHubSearch/GitHubSearch/View/FollowingUserView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "88"
+                  endingLineNumber = "88"
+                  offsetFromSymbolStart = "420">
+               </Location>
+               <Location
+                  uuid = "050004C2-08D9-4D6B-987C-08A80ACF1FDE - e4fd8371f3601f59"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(6) suspend resume partial function for GitHubSearch.FollowingUserView.getFollowingUsers(for: Swift.String) async -&gt; ()"
+                  moduleName = "GitHubSearch"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/anschaefer/Developer/GitHubSearch/GitHubSearch/View/FollowingUserView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "88"
+                  endingLineNumber = "88"
+                  offsetFromSymbolStart = "552">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "65EE4BE6-0EEC-4437-85F8-8F97751C2D96"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GitHubSearch/View/FollowingUserView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "getFollowingUsers(for:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "65EE4BE6-0EEC-4437-85F8-8F97751C2D96 - 7514aa8e5f030881"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for GitHubSearch.FollowingUserView.getFollowingUsers(for: Swift.String) async -&gt; ()"
+                  moduleName = "GitHubSearch"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/anschaefer/Developer/GitHubSearch/GitHubSearch/View/FollowingUserView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "51"
+                  endingLineNumber = "51"
+                  offsetFromSymbolStart = "204">
+               </Location>
+               <Location
+                  uuid = "65EE4BE6-0EEC-4437-85F8-8F97751C2D96 - 7514aa8e5f0308e2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for GitHubSearch.FollowingUserView.getFollowingUsers(for: Swift.String) async -&gt; ()"
+                  moduleName = "GitHubSearch"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/anschaefer/Developer/GitHubSearch/GitHubSearch/View/FollowingUserView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "54"
+                  endingLineNumber = "54"
+                  offsetFromSymbolStart = "204">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

@@ -47,10 +47,12 @@ struct FollowingUserView: View {
         }
     }
     
+    
+    
     func getFollowingUsers(for login: String) async {
-        os_signpost(.begin, log: NetworkHelper.pointsOfInterest, name: "getFollowingUsers")
+        Logger.methodCall.info("Entering getFollowingUsers")
         defer {
-            os_signpost(.end, log: NetworkHelper.pointsOfInterest, name: "getFollowingUsers")
+            Logger.methodCall.info("Leaving getFollowingUsers")
         }
         
         let endpoint = "https://api.github.com/users/\(login)/following"
@@ -121,6 +123,13 @@ struct FollowingUserView: View {
         }
     }
     
+}
+
+extension Logger {
+    private static var subsystem = Bundle.main.bundleIdentifier!
+    
+    // category is important for showing it in instruments...otherwise it can be customized
+    static let methodCall = Logger(subsystem: subsystem, category: "PointsOfInterest")
 }
 
 #Preview {

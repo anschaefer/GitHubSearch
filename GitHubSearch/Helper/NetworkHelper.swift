@@ -9,6 +9,7 @@ import Foundation
 import OSLog
 
 struct NetworkHelper {
+    
     func createUrlSession(sessionName sessionDescription: String) -> URLSession {
         let session = URLSession(configuration:.default)
         session.sessionDescription = sessionDescription
@@ -24,12 +25,10 @@ struct NetworkHelper {
         return request
     }
     
-    static let pointsOfInterest = OSLog(subsystem: "com.cc.macansen.GithubSearch", category: .pointsOfInterest)
-    
     func getPaginationLastPage(for response: URLResponse) -> Int? {
-        os_signpost(.begin, log: NetworkHelper.pointsOfInterest, name: "getPaginationLastPage")
+        os_signpost(.begin, log: OSLog.pointsOfInterest, name: "getPaginationLastPage")
         defer {
-            os_signpost(.end, log: NetworkHelper.pointsOfInterest, name: "getPaginationLastPage")
+            os_signpost(.end, log: OSLog.pointsOfInterest, name: "getPaginationLastPage")
         }
         var pages: Set<Int> = Set()
         
@@ -47,4 +46,10 @@ struct NetworkHelper {
         
         return pages.max()
     }
+}
+
+extension OSLog {
+    private static var subsystem = Bundle.main.bundleIdentifier!
+
+    static let pointsOfInterest = OSLog(subsystem: subsystem, category: .pointsOfInterest)
 }
