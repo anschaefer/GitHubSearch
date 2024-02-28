@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import OSLog
 
 struct ContentView: View {
     @Environment(\.modelContext) var modelContext
@@ -32,7 +33,7 @@ struct ContentView: View {
         do {
             try modelContext.delete(model: FollowingUser.self)
         } catch {
-            print("Failed to delete students.")
+            Logger.swiftData.error("Failed to delete students")
         }
     }
 }

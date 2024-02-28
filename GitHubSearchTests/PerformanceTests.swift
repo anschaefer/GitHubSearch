@@ -28,12 +28,37 @@ final class PerformanceTests: XCTestCase {
         let cut = FollowingUserView(login: "twostraws")
         
         // Act/Assert
-        
         measure {
             Task {
                 await cut.getFollowingUsers(for: "twostraws")
             }
         }
     }
+    
+    func testPaginationPerformance() async {
+        // Arrange
+        let endpoint = "https://api.github.com/users/manniL/following"
+        var urlResponse = URLResponse()
+        
+        guard let url = URL(string: endpoint) else {
+            print("Invalid url")
+            return
+        }
+        
+        let session = URLSession(configuration:.default)
+        
+        do {
+            let (_, response) = try await session.data(from: url)
+            urlResponse = response
+        } catch {
+            // Test will fail anyway
+        }
+        
+        // Act
+        measure {
+            let numberOfPages = NetworkHelper.getPaginationLastPage(for: urlResponse)
+        }
+        
 
+    }
 }

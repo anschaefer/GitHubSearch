@@ -72,9 +72,8 @@ struct UserView: View {
         
         guard let url = URL(string: endpoint) else { throw GHError.invalidURL}
         
-        let requestHelper = NetworkHelper()
-        let session = requestHelper.createUrlSession(sessionName: "Main Session")
-        let request = requestHelper.createRequest(for: url, withMethod: HttpMethods.GET)
+        let session = NetworkHelper.createUrlSession(sessionName: "Main Session")
+        let request = NetworkHelper.createRequest(for: url, withMethod: HttpMethods.GET)
         
         let (data, response) = try await session.data(for: request)
  

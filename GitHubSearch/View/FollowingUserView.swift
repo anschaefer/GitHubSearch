@@ -63,9 +63,8 @@ struct FollowingUserView: View {
             return
         }
         
-        let requestHelper = NetworkHelper()
-        let session = requestHelper.createUrlSession(sessionName: "Following User Session")
-        let request = requestHelper.createRequest(for: url, withMethod: HttpMethods.GET)
+        let session = NetworkHelper.createUrlSession(sessionName: "Following User Session")
+        let request = NetworkHelper.createRequest(for: url, withMethod: HttpMethods.GET)
         
         do {
             let (data, response) = try await session.data(for: request)
@@ -79,7 +78,7 @@ struct FollowingUserView: View {
                 }
             }
             
-            if let pagination = requestHelper.getPaginationLastPage(for: response) {
+            if let pagination = NetworkHelper.getPaginationLastPage(for: response) {
                 await addPaginatedUsersIfAvailable(for: pagination)
             }
         } catch {
@@ -91,9 +90,7 @@ struct FollowingUserView: View {
         }
     }
     
-    func addPaginatedUsersIfAvailable(for pagination: Int) async {
-        let requestHelper = NetworkHelper()
-        
+    func addPaginatedUsersIfAvailable(for pagination: Int) async {      
         print("Response of request uses pagination (pages: \(pagination))")
         for pageIndex in 2...pagination {
             let endpoint = "https://api.github.com/users/\(login)/following?page=\(pageIndex)"
@@ -103,8 +100,8 @@ struct FollowingUserView: View {
                 return
             }
             
-            let session = requestHelper.createUrlSession(sessionName: "Following User Session Paginated")
-            let request = requestHelper.createRequest(for: url, withMethod: HttpMethods.GET)
+            let session = NetworkHelper.createUrlSession(sessionName: "Following User Session Paginated")
+            let request = NetworkHelper.createRequest(for: url, withMethod: HttpMethods.GET)
             
             do {
                 let (data, _) = try await session.data(for: request)
@@ -130,6 +127,7 @@ extension Logger {
     
     // category is important for showing it in instruments...otherwise it can be customized
     static let methodCall = Logger(subsystem: subsystem, category: "PointsOfInterest")
+    static let swiftData = Logger(subsystem: subsystem, category: "PointsOfInterest")
 }
 
 #Preview {
