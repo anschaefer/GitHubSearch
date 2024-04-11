@@ -10,6 +10,9 @@ import SwiftData
 
 @main
 struct GitHubSearchApp: App {
+    
+    let subscriver = MetricKitSubscriber()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()

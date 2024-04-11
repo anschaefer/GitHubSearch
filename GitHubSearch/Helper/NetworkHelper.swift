@@ -27,9 +27,11 @@ struct NetworkHelper {
     
     static func getPaginationLastPage(for response: URLResponse) -> Int? {
         os_signpost(.begin, log: OSLog.pointsOfInterest, name: "getPaginationLastPage")
+        
         defer {
             os_signpost(.end, log: OSLog.pointsOfInterest, name: "getPaginationLastPage")
         }
+        
         var pages: Set<Int> = Set()
         
         let httpResponse = response as? HTTPURLResponse
@@ -50,6 +52,6 @@ struct NetworkHelper {
 
 extension OSLog {
     private static var subsystem = Bundle.main.bundleIdentifier!
-
+    
     static let pointsOfInterest = OSLog(subsystem: subsystem, category: .pointsOfInterest)
 }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MetricKit
 
 struct UserView: View {
     var login: String
@@ -54,6 +55,7 @@ struct UserView: View {
     }
     
     func requestUser(with userHandle: String) async {
+        
         do {
             try await getUser(by: userHandle)
         } catch GHError.invalidURL {
@@ -68,6 +70,9 @@ struct UserView: View {
     }
     
     func getUser(by handle: String) async throws{
+        
+        mxSignpost(.event, log: MXMetricManager.userViewHandle, name: "Get users from GitHub")
+        
         let endpoint = "https://api.github.com/users/\(handle)"
         
         guard let url = URL(string: endpoint) else { throw GHError.invalidURL}
@@ -89,6 +94,10 @@ struct UserView: View {
             throw GHError.invalidData
         }
     }
+}
+
+extension MXMetricManager {
+    static let userViewHandle = MXMetricManager.makeLogHandle(category: "UserView")
 }
 
 #Preview {

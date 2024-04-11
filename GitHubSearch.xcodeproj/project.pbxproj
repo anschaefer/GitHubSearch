@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		978D48D42BC688DF00926D3F /* MetricKitSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978D48D32BC688DF00926D3F /* MetricKitSubscriber.swift */; };
 		97D48B5C2B85D02A0050BFAF /* GitHubSearchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D48B5B2B85D02A0050BFAF /* GitHubSearchApp.swift */; };
 		97D48B5E2B85D02A0050BFAF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D48B5D2B85D02A0050BFAF /* ContentView.swift */; };
 		97D48B602B85D02B0050BFAF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97D48B5F2B85D02B0050BFAF /* Assets.xcassets */; };
@@ -44,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		978D48D32BC688DF00926D3F /* MetricKitSubscriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricKitSubscriber.swift; sourceTree = "<group>"; };
 		97D48B582B85D02A0050BFAF /* GitHubSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHubSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97D48B5B2B85D02A0050BFAF /* GitHubSearchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubSearchApp.swift; sourceTree = "<group>"; };
 		97D48B5D2B85D02A0050BFAF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -91,6 +93,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		978D48D22BC688BF00926D3F /* Diagnostics */ = {
+			isa = PBXGroup;
+			children = (
+				978D48D32BC688DF00926D3F /* MetricKitSubscriber.swift */,
+			);
+			path = Diagnostics;
+			sourceTree = "<group>";
+		};
 		97D48B4F2B85D02A0050BFAF = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +124,7 @@
 		97D48B5A2B85D02A0050BFAF /* GitHubSearch */ = {
 			isa = PBXGroup;
 			children = (
+				978D48D22BC688BF00926D3F /* Diagnostics */,
 				97D48B992B85D23C0050BFAF /* Error */,
 				97D48B942B85D1C50050BFAF /* Helper */,
 				97D48B8B2B85D0DD0050BFAF /* View */,
@@ -324,6 +335,7 @@
 				97D48B8F2B85D1400050BFAF /* UserView.swift in Sources */,
 				97D48B872B85D06E0050BFAF /* GitHubUser.swift in Sources */,
 				97D48B5E2B85D02A0050BFAF /* ContentView.swift in Sources */,
+				978D48D42BC688DF00926D3F /* MetricKitSubscriber.swift in Sources */,
 				97D48B932B85D1A50050BFAF /* FollowingUserView.swift in Sources */,
 				97D48B892B85D0880050BFAF /* FollowingUser.swift in Sources */,
 				97D48B5C2B85D02A0050BFAF /* GitHubSearchApp.swift in Sources */,

@@ -48,9 +48,9 @@ struct FollowingUserView: View {
     }
     
     
-    
     func getFollowingUsers(for login: String) async {
         Logger.methodCall.info("Entering getFollowingUsers")
+        
         defer {
             Logger.methodCall.info("Leaving getFollowingUsers")
         }
@@ -125,7 +125,6 @@ struct FollowingUserView: View {
 extension Logger {
     private static var subsystem = Bundle.main.bundleIdentifier!
     
-    // category is important for showing it in instruments...otherwise it can be customized
     static let methodCall = Logger(subsystem: subsystem, category: "PointsOfInterest")
     static let swiftData = Logger(subsystem: subsystem, category: "PointsOfInterest")
 }
