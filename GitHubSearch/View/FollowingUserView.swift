@@ -17,38 +17,29 @@ struct FollowingUserView: View {
     
     var body: some View {
         NavigationStack {
-            Button("Get Following Users") {
-                Task {
-                    await getFollowingUsers(for: login)
-                }
-            }
-            
-            List(followingUsers, id: \.login) { item in
-                HStack() {
-                    AsyncImage(url: URL(string: item.avatarUrl)) { image in
-                        image.resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .clipShape(Circle())
-                    } placeholder: {
-                        Circle()
-                            .foregroundColor(.secondary)
-                    }
-                    .frame(width: 40, height: 40)
-                    
-                    NavigationLink(item.login, destination: UserView(login: item.login))
+            List {
+                ForEach(followingUsers, id: \.login) { user in
+                    NavigationLink(user.login, destination: UserView(login: user.login))
                         .font(.headline)
                         .navigationTitle("Following Users")
-                    
                 }
             }
-            .toolbar(content: {
-                NavigationLink("Search", destination: ContentView())
-            })
+            .listStyle(.inset)
+            
+        }.task {
+            do {
+                try await getFollowingUsers(for: login)
+            } catch {
+                
+            }
         }
+        .toolbar(content: {
+            NavigationLink("Search", destination: ContentView())
+        })
     }
     
     
-    func getFollowingUsers(for login: String) async {
+    func getFollowingUsers(for login: String) async throws {
         Logger.methodCall.info("Entering getFollowingUsers")
         
         defer {
@@ -82,7 +73,7 @@ struct FollowingUserView: View {
                 await addPaginatedUsersIfAvailable(for: pagination)
             }
         } catch {
-            print("Invalid data")
+            print(error.localizedDescription)
         }
         
         for user in followingUsers {

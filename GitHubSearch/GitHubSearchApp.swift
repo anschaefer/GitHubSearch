@@ -11,7 +11,7 @@ import SwiftData
 @main
 struct GitHubSearchApp: App {
     
-    let subscriver = MetricKitSubscriber()
+    let subscriber = MetricKitSubscriber()
     
     var body: some Scene {
         WindowGroup {
