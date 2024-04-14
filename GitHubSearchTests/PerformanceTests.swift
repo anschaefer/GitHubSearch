@@ -30,7 +30,7 @@ final class PerformanceTests: XCTestCase {
         // Act/Assert
         measure {
             Task {
-                await cut.getFollowingUsers(for: "twostraws")
+               try await cut.getFollowingUsers(for: "twostraws")
             }
         }
     }
