@@ -13,20 +13,66 @@ struct FollowingUserView: View {
     @Environment(\.modelContext) var modelContext
     @State var followingUsers = [FollowingUser]()
     
+//    private let columns = [
+//        GridItem(.flexible()),
+//        GridItem(.flexible()),
+//        GridItem(.flexible()),
+//        GridItem(.flexible())
+//      ]
+    
+    private let rows = [
+        FollowingUser(login: "", avatarUrl: ""),
+        FollowingUser(login: "", avatarUrl: ""),
+        FollowingUser(login: "", avatarUrl: ""),
+        FollowingUser(login: "", avatarUrl: ""),
+        FollowingUser(login: "", avatarUrl: ""),
+        FollowingUser(login: "", avatarUrl: ""),
+        FollowingUser(login: "", avatarUrl: ""),
+        FollowingUser(login: "", avatarUrl: ""),
+        FollowingUser(login: "", avatarUrl: ""),
+        FollowingUser(login: "", avatarUrl: ""),
+        FollowingUser(login: "", avatarUrl: ""),
+        FollowingUser(login: "", avatarUrl: ""),
+        FollowingUser(login: "", avatarUrl: "")
+    ]
+    
     var login: String
     
     var body: some View {
-        NavigationStack {
-            List {
-                ForEach(followingUsers, id: \.login) { user in
-                    NavigationLink(user.login, destination: UserView(login: user.login))
-                        .font(.headline)
-                        .navigationTitle("Following Users")
+        ScrollView {
+            Grid{
+                ForEach(followingUsers) { user in
+                    GridRow {
+                        ForEach(rows) { _ in
+                            AsyncImage(url: URL(string: user.avatarUrl)) { image in
+                                image.resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .clipShape(Circle())
+                            } placeholder: {
+                                Circle()
+                                    .foregroundColor(.secondary)
+                            }
+                        }
+                    }
                 }
             }
-            .listStyle(.inset)
-            
-        }.task {
+//            LazyVGrid(columns: columns, spacing: 10) {
+//                ForEach(followingUsers) { user in
+//                    VStack {
+//                        AsyncImage(url: URL(string: user.avatarUrl)) { image in
+//                            image.resizable()
+//                                .aspectRatio(contentMode: .fit)
+//                                .clipShape(Circle())
+//                        } placeholder: {
+//                            Circle()
+//                                .foregroundColor(.secondary)
+//                        }
+//                        NavigationLink(user.login, destination: UserView(login: user.login))
+//                    }
+//                }
+//            }
+        }
+        .task {
             do {
                 try await getFollowingUsers(for: login)
             } catch {
@@ -81,7 +127,7 @@ struct FollowingUserView: View {
         }
     }
     
-    func addPaginatedUsersIfAvailable(for pagination: Int) async {      
+    func addPaginatedUsersIfAvailable(for pagination: Int) async {
         print("Response of request uses pagination (pages: \(pagination))")
         for pageIndex in 2...pagination {
             let endpoint = "https://api.github.com/users/\(login)/following?page=\(pageIndex)"

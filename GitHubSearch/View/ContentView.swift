@@ -23,9 +23,10 @@ struct ContentView: View {
                     VStack(alignment: .leading, content: {
                         Text(user.login).font(.headline)
                     })}
-            }.toolbar(content: {
-                Button("Delete data", action: deleteData)
-            })
+            }
+//            .toolbar(content: {
+//                Button("Delete data", action: deleteData)
+//            })
         }
     }
     
